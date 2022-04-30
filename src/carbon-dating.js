@@ -18,7 +18,17 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(sampleActivity) {
+  if(!sampleActivity || (typeof sampleActivity) !== 'string' || isNaN(sampleActivity) || +sampleActivity < 1) {
+    return false
+  }
+  let year = 0
+  let period = 0
+  period = 0.693 / HALF_LIFE_PERIOD
+  year = (Math.log(MODERN_ACTIVITY / sampleActivity)) / period
+
+  if(year < 0) return false
   
+  return Math.trunc(Math.ceil(year))
 }
 
 module.exports = {
