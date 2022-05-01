@@ -13,14 +13,17 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 function sortByHeight(arr) {
   let copy = arr.slice()
-  copy.sort((a,b) => {
-    if(a === -1 || b === -1) {
-      
-    } else {
-      return a - b
+  let b = []
+  copy.forEach((el, i, arr) => {
+    if(el === -1) {
+      b.push(i)
     }
   })
-
+  copy.sort((a,b) => a-b)
+  copy.splice(0, b.length)
+  for(let i = 0; i < b.length; i++) {
+    copy.splice(b[i], 0, -1)
+  }
   return copy
 }
 
